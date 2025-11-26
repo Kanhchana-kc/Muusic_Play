@@ -161,7 +161,6 @@ body {
     </div>
     <?php endforeach; ?>
 </div>
-```
 
 </div>
 

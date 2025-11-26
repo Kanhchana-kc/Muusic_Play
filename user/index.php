@@ -30,9 +30,152 @@ while ($row = $songs->fetch_assoc()) {
     <title>NOBILI Music Player</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s;
+        }
+
+        body.dark-mode {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        body.dark-mode .card {
+            background-color: #2d2d2d;
+            border-color: #444;
+        }
+
+        body.dark-mode .card-title,
+        body.dark-mode .card-body {
+            color: #fff;
+        }
+
+        body.dark-mode .sticky-player {
+            background: #2d2d2d;
+            border-top: 1px solid #444;
+        }
+
+        .song-card {
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            border: none;
+        }
+
+        .song-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .cover-img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 48px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .song-card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .sticky-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #ddd;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #nowPlayingCover {
+            width: 70px;
+            height: 70px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .info {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .controls button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        body.dark-mode .controls button {
+            color: #fff;
+        }
+
+        .controls button:hover {
+            color: #007bff;
+        }
+
+        .progress-container {
+            height: 4px;
+            background: #ddd;
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        body.dark-mode .progress-container {
+            background: #444;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            border-radius: 2px;
+            width: 0%;
+        }
+
+        body {
+            padding-bottom: 100px;
+        }
+
+        #toggleTheme {
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
+    <?php include '../navbar.php'; ?>
 
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-3">

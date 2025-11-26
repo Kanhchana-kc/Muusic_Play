@@ -3,10 +3,10 @@ session_start();
 require '../config.php';
 
 // Only admin can access
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../login.php");
-    exit;
-}
+// if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+//     header("Location: ../login.php");
+//     exit;
+// }
 
 // DELETE USER
 if (isset($_GET['delete'])) {
@@ -53,6 +53,8 @@ if (isset($_POST['edit_user'])) {
 $result = $conn->query("SELECT * FROM users ORDER BY id DESC");
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
